@@ -9,28 +9,21 @@
 
 void printUsage(std::string name)
 {
-    std::cerr << "Usage: " << name << " (-d <boiler_device_num> -b <gear_device_num> | -f <filename>) [--no-networking] [--headless] [--debug]" << std::endl;
+    std::cerr << "Usage: " << name << " (-d <device_num> | -f <filename>)" << std::endl;
 }
 
 CmdLineInterface::CmdLineInterface(int argc, char *argv[])
 {
-    int isHeadless = 0;
-    int isNetworking = 1;
-    int isDebug = 0;
 
     while (true) {
         static struct option long_options[] = {
-            {"headless", no_argument, &isHeadless, 1},
-            {"no-networking", no_argument, &isNetworking, 0},
-            {"debug", no_argument, &isDebug, 1},
-            {"gearDevice", required_argument, 0, 'd'},
-            {"boilerDevice", required_argument, 0, 'b'},
+            {"device", required_argument, 0, 'd'},
             {"file", required_argument, 0, 'f'},
             {0, 0, 0, 0}
         };
 
         int option_index = 0;
-        int c = getopt_long(argc, argv, "d:b:f:", long_options, &option_index);
+        int c = getopt_long(argc, argv, "d:f:", long_options, &option_index);
 
         if (c == -1) // End of Options
             break;
@@ -44,20 +37,12 @@ CmdLineInterface::CmdLineInterface(int argc, char *argv[])
                 printUsage(argv[0]);
                 exit(1);
             }
-            config.setGearDeviceID(boost::lexical_cast<int>(optarg));
-            config.setIsGearDevice(1);
+            config.setDeviceID(boost::lexical_cast<int>(optarg));
+            config.setIsDevice(1);
             break;
-        case 'b':
-            if(config.getIsFile())
-            {
-                printUsage(argv[0]);
-                exit(1);
-            }
-            config.setBoilerDeviceID(boost::lexical_cast<int>(optarg));
-            config.setIsBoilerDevice(1);
-            break;
+
         case 'f':
-            if(config.getIsGearDevice() && config.getIsBoilerDevice())
+            if(config.getIsDevice())
             {
                 printUsage(argv[0]);
                 exit(1);
@@ -73,32 +58,12 @@ CmdLineInterface::CmdLineInterface(int argc, char *argv[])
         }
     }
 
-    if (config.getIsFile() != 1 && config.getIsGearDevice() != 1 && config.getIsBoilerDevice() != 1)
+    if (config.getIsFile() != 1 && config.getIsDevice() != 1)
     {
         printUsage(argv[0]);
         exit(1);
     }
 
-    config.setIsHeadless(isHeadless);
-    config.setIsDebug(isDebug);
-    config.setIsNetworking(isNetworking);
-
-    if(isDebug)
-    {
-        if(isHeadless)
-            std::cout << "Headless mode\n";
-
-        if(!isNetworking)
-            std::cout << "No networking mode\n";
-
-        if(config.getIsGearDevice() && config.getIsBoilerDevice())
-            std::cout << "Device mode: using /dev/video" <<
-                config.getGearDeviceID() << " " << config.getBoilerDeviceID() << std::endl;
-
-        if(config.getIsFile())
-            std::cout << "File mode: using " <<
-                config.getFileName() << std::endl;
-    }
 }
 
 AppConfig CmdLineInterface::getConfig()

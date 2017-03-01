@@ -12,9 +12,6 @@ public:
     double getWidth();
     void printPoints();
     Point getCenter();
-    void setTar(bool tar);
-    bool getType();
-    bool getTar();
     Point getTopPoint();
     Point getBottomPoint();
     Point getLeftPoint();
@@ -26,8 +23,6 @@ private:
     Point getRightLeftPoint();
     std::vector<Point> edgeL;
     std::vector<Point> edgeR;
-    bool Tar;
 };
 
 #endif
-

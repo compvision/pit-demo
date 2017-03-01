@@ -26,17 +26,6 @@ Target::Target(std::vector<cv::Point> contour)
     edgeR = contour;
 }
 
-void Target::setTar(bool tar) {
-
-    Tar = tar;
-}
-
-bool Target::getTar() {
-
-    return Tar;
-
-}
-
 double Target::getHeight()
 {
     return fabs(getTopPoint().y - getBottomPoint().y);
@@ -48,14 +37,6 @@ double Target::getWidth()
 }
 
 //True if Gears, False if Boilers
-bool Target::getType() {
-  if (getHeight() > getWidth()) {
-    return true;
-  }
-if (getHeight() < getWidth()) {
-    return false;
-  }
-}
 
 /*
 bool Target::isInitialized()

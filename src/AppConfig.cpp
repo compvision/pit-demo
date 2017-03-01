@@ -4,14 +4,9 @@
 #include "AppConfig.hpp"
 
 AppConfig::AppConfig() :
-gearDeviceID(0),
-boilerDeviceID(0),
+DeviceID(0),
 isFile(0),
-isGearDevice(0),
-isBoilerDevice(0),
-isHeadless(0),
-isNetworking(1),
-isDebug(0)
+isDevice(0)
 {
 }
 
@@ -21,14 +16,9 @@ std::string AppConfig::getFileName()
     return fileName;
 }
 
-int AppConfig::getGearDeviceID()
+int AppConfig::getDeviceID()
 {
-    return gearDeviceID;
-}
-
-int AppConfig::getBoilerDeviceID()
-{
-    return boilerDeviceID;
+    return DeviceID;
 }
 
 int AppConfig::getIsFile()
@@ -36,29 +26,9 @@ int AppConfig::getIsFile()
     return isFile;
 }
 
-int AppConfig::getIsGearDevice()
+int AppConfig::getIsDevice()
 {
-    return isGearDevice;
-}
-
-int AppConfig::getIsBoilerDevice()
-{
-    return isBoilerDevice;
-}
-
-int AppConfig::getIsHeadless()
-{
-    return isHeadless;
-}
-
-int AppConfig::getIsNetworking()
-{
-    return isNetworking;
-}
-
-int AppConfig::getIsDebug()
-{
-    return isDebug;
+    return isDevice;
 }
 
 // Setters
@@ -67,14 +37,9 @@ void AppConfig::setFileName(std::string inputFileName)
     fileName = inputFileName;
 }
 
-void AppConfig::setGearDeviceID(int inputDeviceID)
+void AppConfig::setDeviceID(int inputDeviceID)
 {
-    gearDeviceID = inputDeviceID;
-}
-
-void AppConfig::setBoilerDeviceID(int inputDeviceID)
-{
-    boilerDeviceID = inputDeviceID;
+    DeviceID = inputDeviceID;
 }
 
 void AppConfig::setIsFile(int inputIsFile)
@@ -82,27 +47,7 @@ void AppConfig::setIsFile(int inputIsFile)
     isFile = inputIsFile;
 }
 
-void AppConfig::setIsGearDevice(int inputIsDevice)
+void AppConfig::setIsDevice(int inputIsDevice)
 {
-    isGearDevice = inputIsDevice;
-}
-
-void AppConfig::setIsBoilerDevice(int inputIsDevice)
-{
-    isBoilerDevice = inputIsDevice;
-}
-
-void AppConfig::setIsHeadless(int inputIsHeadless)
-{
-    isHeadless = inputIsHeadless;
-}
-
-void AppConfig::setIsNetworking(int inputIsNetworking)
-{
-    isNetworking = inputIsNetworking;
-}
-
-void AppConfig::setIsDebug(int debug)
-{
-    isDebug = debug;
+    isDevice = inputIsDevice;
 }

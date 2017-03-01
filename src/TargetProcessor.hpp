@@ -19,8 +19,7 @@ public:
 private:
     double imageTarWidth;
     double imageTarHeight;
-    double GearWidth;
-    double BoilerWidth;
+    double Width;
     //double objectHeight;
     //only need width or height, not both.
     cv::Point imageTarCenter;
@@ -29,8 +28,6 @@ private:
     //center horizontal point of the picture
     double vertCenter;
     //center vertical point
-    bool Tar;
-
 
 };
 
