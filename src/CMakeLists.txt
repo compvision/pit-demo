@@ -14,8 +14,8 @@ find_package(Boost REQUIRED COMPONENTS system thread)
 #add_executable(cv-net cv_b.cpp NetworkController.cpp)
 #target_link_libraries(cv-net ${OpenCV_LIBS} ${Boost_LIBRARIES})
 
-add_executable(cv-2017 main.cpp Target.cpp TargetDetector.cpp TargetProcessor.cpp NetworkController.cpp VideoDevice.cpp GUIManager.cpp CmdLineInterface.cpp AppConfig.cpp)
-target_link_libraries(cv-2017 ${OpenCV_LIBS} ${Boost_LIBRARIES})
+add_executable(pit-demo main.cpp Target.cpp TargetDetector.cpp TargetProcessor.cpp NetworkController.cpp VideoDevice.cpp GUIManager.cpp CmdLineInterface.cpp AppConfig.cpp)
+target_link_libraries(pit-demo ${OpenCV_LIBS} ${Boost_LIBRARIES})
 
 #add_executable(stupid stupid.cpp TargetDetector.cpp)
 #target_link_libraries(stupid ${OpenCV_LIBS})

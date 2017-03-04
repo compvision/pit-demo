@@ -40,8 +40,8 @@ int main(int argc, char* argv[])
     cv::Mat Image;
 
     int loop = 1;
-    //cv::namedWindow("Live Video Feed", cv::WINDOW_NORMAL);
-    //cv::namedWindow("General", cv::WINDOW_NORMAL);
+    cv::namedWindow("Feed", cv::WINDOW_NORMAL);
+    cv::namedWindow("General", cv::WINDOW_NORMAL);
 
     while(cv::waitKey(30) != 27)
     {
@@ -95,19 +95,18 @@ int main(int argc, char* argv[])
                 std::string alt = "altitude (Gear): " + patch::to_string(Altitude);
                 std::string azi = "azimuth (Gear): " + patch::to_string(Azimuth);
 
-                //cv::putText(background, dis, cv::Point(50,100),
-                //cv::FONT_HERSHEY_COMPLEX_SMALL, 2, cv::Scalar(0, 255, 0),
-                //1);
+                cv::putText(background, dis, cv::Point(50,100),
+                cv::FONT_HERSHEY_COMPLEX_SMALL, 2, cv::Scalar(0, 255, 0),
+                1);
 
-                //cv::putText(background, alt, cv::Point(50,200),
-                //cv::FONT_HERSHEY_COMPLEX_SMALL, 2, cv::Scalar(0, 255, 0),
-                //1);
+                cv::putText(background, alt, cv::Point(50,200),
+                cv::FONT_HERSHEY_COMPLEX_SMALL, 2, cv::Scalar(0, 255, 0),
+                1);
 
-                //cv::putText(background, azi, cv::Point(50,400),
-                //cv::FONT_HERSHEY_COMPLEX_SMALL, 2, cv::Scalar(0, 255, 0),
-                //1);
-                //if (config.getIsHeadless() == 0)  					//for background
-                ////imshow("General", background);
+                cv::putText(background, azi, cv::Point(50,400),
+                cv::FONT_HERSHEY_COMPLEX_SMALL, 2, cv::Scalar(0, 255, 0),
+                1);
+                imshow("General", background);
 
 
                 //information to send (Networking)
@@ -120,8 +119,7 @@ int main(int argc, char* argv[])
         }
         GaussianBlur(Image, Image,Size(3,3),31);
 
-            //imshow("Feed", Image);
-            //imshow("BoilerFeed", boilerImage);
+            imshow("Feed", Image);
 
 
     }

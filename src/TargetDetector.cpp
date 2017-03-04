@@ -12,7 +12,7 @@ Target* TargetDetector::processImage(Mat input) {
     GaussianBlur(input,input,Size(3,3),31);
     //input = canny(thresholdImage(input,53,58,228,238));
     input = thresholdImage(input,53,58,228,238);
-    //imshow("Threshold", input);
+    imshow("Threshold", input);
     input = canny(input);
     //imshow("Canny", input);
     dilate(input, input, Mat());
@@ -39,6 +39,7 @@ Target* TargetDetector::processImage(Mat input) {
 
     if(finalContour.size() == 0)
     {
+      std::cout<<"KMS"<<std::endl;
         return NULL;
     }
     else {
@@ -215,8 +216,9 @@ std::vector<std::vector<Point> > TargetDetector::filterContours(std::vector<std:
                     returnVector.push_back(gearVector[minI]);
                 }
 
-             //   Scalar color(255,0,0);
-            //    cv::drawContours(img, returnVector, -1, color, 10);
+          Scalar color(255,0,0);
+           cv::drawContours(img, returnVector, -1, color, 10);
+           imshow("Contours", img);
                 std::cout << "found gear: " << std::endl;
                 std::cout << "target one center : " << tempOne->getCenter() << std::endl;
                 std::cout << "target two center : " << tempTwo->getCenter() << std::endl;
