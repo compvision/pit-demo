@@ -18,8 +18,9 @@ CmdLineInterface::CmdLineInterface(int argc, char *argv[])
     while (true) {
         static struct option long_options[] = {
             {"device", required_argument, 0, 'd'},
-            {"file", required_argument, 0, 'f'},
-            {0, 0, 0, 0}
+            {"file", required_argument, 0, 'f'}
+            //,
+            //{0, 0, 0, 0}
         };
 
         int option_index = 0;

@@ -2,17 +2,23 @@
 #include "Target.hpp"
 #include <iostream>
 //public methods
-
+int iterator = 0;
 TargetDetector::TargetDetector() {
     //do derpy things
 }
 
-Target* TargetDetector::processImage(Mat input) {
-
+Target* TargetDetector::processImage(Mat input, int i) {
+    iterator =i;
     GaussianBlur(input,input,Size(3,3),31);
     //input = canny(thresholdImage(input,53,58,228,238));
     input = thresholdImage(input,53,58,228,238);
-    imshow("Threshold", input);
+    /*cv::namedWindow("Threshold", cv::WINDOW_NORMAL);
+    cvSetWindowProperty("Threshold", CV_WND_PROP_FULLSCREEN, CV_WINDOW_FULLSCREEN);
+    cv::namedWindow("Contours", cv::WINDOW_NORMAL);
+    cvSetWindowProperty("Contours", CV_WND_PROP_FULLSCREEN, CV_WINDOW_FULLSCREEN);*/
+    if(iterator==2){
+      imshow("Threshold", input);
+    }
     input = canny(input);
     //imshow("Canny", input);
     dilate(input, input, Mat());
@@ -218,7 +224,9 @@ std::vector<std::vector<Point> > TargetDetector::filterContours(std::vector<std:
 
           Scalar color(255,0,0);
            cv::drawContours(img, returnVector, -1, color, 10);
-           imshow("Contours", img);
+           if(iterator ==3){
+             imshow("Contours", img);
+           }
                 std::cout << "found gear: " << std::endl;
                 std::cout << "target one center : " << tempOne->getCenter() << std::endl;
                 std::cout << "target two center : " << tempTwo->getCenter() << std::endl;
