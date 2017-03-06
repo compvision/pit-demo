@@ -7,6 +7,7 @@ using namespace cv;
 
 class TargetDetector
 {
+
 public:
     TargetDetector();
     Target* processImage(Mat input, int iterator);
@@ -19,6 +20,7 @@ private:
     std::vector<std::vector<Point> >  contour(Mat input);
     std::vector<std::vector<Point> > filterContours(std::vector<std::vector<Point> > contours, cv::Mat img);
     std::vector<Point> arcCheck1(std::vector<Point> input);
+    int iterator = 1;
 };
 
 #endif

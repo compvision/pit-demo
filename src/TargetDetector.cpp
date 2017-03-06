@@ -2,7 +2,7 @@
 #include "Target.hpp"
 #include <iostream>
 //public methods
-int iterator = 0;
+//int iterator = 0;
 TargetDetector::TargetDetector() {
     //do derpy things
 }
@@ -17,7 +17,7 @@ Target* TargetDetector::processImage(Mat input, int i) {
     cv::namedWindow("Contours", cv::WINDOW_NORMAL);
     cvSetWindowProperty("Contours", CV_WND_PROP_FULLSCREEN, CV_WINDOW_FULLSCREEN);*/
     if(iterator==2){
-      imshow("Threshold", input);
+      imshow("CV Demo", input);
     }
     input = canny(input);
     //imshow("Canny", input);
@@ -225,7 +225,7 @@ std::vector<std::vector<Point> > TargetDetector::filterContours(std::vector<std:
           Scalar color(255,0,0);
            cv::drawContours(img, returnVector, -1, color, 10);
            if(iterator ==3){
-             imshow("Contours", img);
+             imshow("CV Demo", img);
            }
                 std::cout << "found gear: " << std::endl;
                 std::cout << "target one center : " << tempOne->getCenter() << std::endl;

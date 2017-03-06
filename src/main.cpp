@@ -12,6 +12,7 @@
 #include <string>
 #include <sstream>
 bool pressed = false;
+int iterator = 1;
 
 namespace patch
 {
@@ -28,8 +29,6 @@ namespace patch
 int main(int argc, char* argv[])
 {
   int space;
-
-  int iterator = 1;
 
   TargetDetector detector;
   TargetProcessor processor;
@@ -51,48 +50,54 @@ int main(int argc, char* argv[])
     std::cout<<"Iterator: "<<iterator<<std::endl;
     //std::cout<<"Space: "<<space<<std::endl;
     if(space == ' ' && pressed == false){
-      iterator++;
+      iterator = (iterator) % 4 + 1;
 
       pressed = true;
     }
     else if(space == -1){
       pressed = false;
     }
-    if(iterator > 4){
+    /*if(iterator > 4){
       iterator=1;
-    }
-
-    switch(iterator){
-      case 1:
-      cv::namedWindow("Feed", cv::WINDOW_NORMAL);
-      cvSetWindowProperty("Feed", CV_WND_PROP_FULLSCREEN, CV_WINDOW_FULLSCREEN);
-      break;
-      case 4:
-      cv::namedWindow("General", cv::WINDOW_NORMAL);
-      cvSetWindowProperty("General", CV_WND_PROP_FULLSCREEN, CV_WINDOW_FULLSCREEN);
-      break;
-      case 2:
-      cv::namedWindow("Threshold", cv::WINDOW_NORMAL);
-      cvSetWindowProperty("Threshold", CV_WND_PROP_FULLSCREEN, CV_WINDOW_FULLSCREEN);
-      break;
-      case 3:
-      cv::namedWindow("Contours", cv::WINDOW_NORMAL);
-      cvSetWindowProperty("Contours", CV_WND_PROP_FULLSCREEN, CV_WINDOW_FULLSCREEN);
-      break;
-    }
+    }*/
+    cv::namedWindow("CV Demo", cv::WINDOW_NORMAL);
+    cvSetWindowProperty("CV Demo", CV_WND_PROP_FULLSCREEN, CV_WINDOW_FULLSCREEN);
+    // switch(iterator){
+    //   case 1:
+    //   cv::namedWindow("Feed", cv::WINDOW_NORMAL);
+    //   cvSetWindowProperty("Feed", CV_WND_PROP_FULLSCREEN, CV_WINDOW_FULLSCREEN);
+    //   break;
+    //   case 4:
+    //   cv::namedWindow("General", cv::WINDOW_NORMAL);
+    //   cvSetWindowProperty("General", CV_WND_PROP_FULLSCREEN, CV_WINDOW_FULLSCREEN);
+    //   break;
+    //   case 2:
+    //   cv::namedWindow("Threshold", cv::WINDOW_NORMAL);
+    //   cvSetWindowProperty("Threshold", CV_WND_PROP_FULLSCREEN, CV_WINDOW_FULLSCREEN);
+    //   break;
+    //   case 3:
+    //   cv::namedWindow("Contours", cv::WINDOW_NORMAL);
+    //   cvSetWindowProperty("Contours", CV_WND_PROP_FULLSCREEN, CV_WINDOW_FULLSCREEN);
+    //   break;
+    // }
     cv::Mat background(Size(1000,1000), CV_8UC1, Scalar(255, 255, 255 ));
 
     std::cout << "While Loop #" << loop << std::endl;
 
     Image = Camera.getImage();
+    GaussianBlur(Image, Image,Size(3,3),31);
+    if(iterator==1){
+      imshow("CV Demo", Image);
+      std::cout<<"Showing image\n";
+    }
 
     if(!Image.data) { // check if gearCamera image is valid
       std::cout << "Failed to read Image" << std::endl;
       return -1;
     }
 
-
-    Target* target = detector.processImage(Image, iterator); //Gears
+    Mat temp = Image.clone();
+    Target* target = detector.processImage(temp, iterator); //Gears
 
     bool foundTarget = false;
 
@@ -143,7 +148,7 @@ int main(int argc, char* argv[])
         1);
 
         if(iterator==4){
-          imshow("General", background);
+          imshow("CV Demo", background);
         }
 
         //information to send (Networking)
@@ -154,10 +159,7 @@ int main(int argc, char* argv[])
       delete target;
       //refresh loop
     }
-    GaussianBlur(Image, Image,Size(3,3),31);
-    if(iterator==1){
-      imshow("Feed", Image);
-    }
+
 
   }
   return 0;
