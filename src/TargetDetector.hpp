@@ -5,9 +5,9 @@
 #include <opencv2/opencv.hpp>
 using namespace cv;
 
+
 class TargetDetector
 {
-
 public:
     TargetDetector();
     Target* processImage(Mat input, int iterator);

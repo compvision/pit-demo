@@ -7,6 +7,8 @@ TargetDetector::TargetDetector() {
     //do derpy things
 }
 
+
+
 Target* TargetDetector::processImage(Mat input, int i) {
     iterator =i;
     GaussianBlur(input,input,Size(3,3),31);
@@ -130,6 +132,7 @@ std::vector<std::vector<Point> > TargetDetector::filterContours(std::vector<std:
             approxPolyDP(contours[j], outputContour, (cv::arcLength(cv::Mat(contours.at(j)), true) * 0.02), true);
             if (contourArea(outputContour) > 100 && outputContour.size() == 4)
             {
+
                 double maxCosine = 0;
                 for(int j = 2; j <=4; j++)
                 {
@@ -204,6 +207,7 @@ std::vector<std::vector<Point> > TargetDetector::filterContours(std::vector<std:
 
         if(gearVector.size() > 1)
         {
+
             std::cout << "min Val: " << minVal << std::endl;
             Target* tempOne = new Target(gearVector[minI]);
             Target* tempTwo = new Target(gearVector[minK]);
