@@ -238,6 +238,16 @@ std::vector<std::vector<Point> > TargetDetector::filterContours(std::vector<std:
                 delete tempTwo;
                 return returnVector;
             }
+
+        }
+        else if(iterator ==3){
+          cv::Mat back(Size(1000,1000), CV_8UC1, Scalar(255, 255, 255 ));
+          std::string dis = "Finding Contours";
+          cv::putText(back, dis, cv::Point(75,300),
+          cv::FONT_HERSHEY_COMPLEX_SMALL, 2, cv::Scalar(0, 255, 0),
+          3);
+          imshow("CV Demo", back);
+
         }
         std::cout << "filtercontour: before return an empty vector "<<  std::endl;
         return std::vector<std::vector<cv::Point> >();
